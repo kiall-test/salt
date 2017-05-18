@@ -24,7 +24,7 @@ kube_user:        'kube'
 kube_group:       'kube'
 
 # install the addons (ie, DNS)
-addons:           'false'
+addons:           'true'
 
 paths:
   ca_dir:         '/etc/pki/trust/anchors'

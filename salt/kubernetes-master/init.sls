@@ -100,14 +100,19 @@ kube-controller-manager:
     - source:      salt://kubernetes-master/addons/namespace.yaml.jinja
     - template:    jinja
 
-/root/skydns-rc.yaml:
+/root/kubedns-cm.yaml:
   file.managed:
-    - source:      salt://kubernetes-master/addons/skydns-rc.yaml.jinja
+    - source:      salt://kubernetes-master/addons/kubedns-cm.yaml.jinja
     - template:    jinja
 
-/root/skydns-svc.yaml:
+/root/kubedns.yaml:
   file.managed:
-    - source:      salt://kubernetes-master/addons/skydns-svc.yaml.jinja
+    - source:      salt://kubernetes-master/addons/kubedns.yaml.jinja
+    - template:    jinja
+
+/root/kubedns-svc.yaml:
+  file.managed:
+    - source:      salt://kubernetes-master/addons/kubedns-svc.yaml.jinja
     - template:    jinja
 
 deploy_addons.sh:
@@ -117,7 +122,8 @@ deploy_addons.sh:
       - pkg:       kubernetes-master
       - service:   kube-apiserver
       - file:      /root/namespace.yaml
-      - file:      /root/skydns-svc.yaml
-      - file:      /root/skydns-rc.yaml
+      - file:      /root/kubedns-cm.yaml
+      - file:      /root/kubedns-svc.yaml
+      - file:      /root/kubedns.yaml
 
 {% endif %}
